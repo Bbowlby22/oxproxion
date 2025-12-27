@@ -7,7 +7,7 @@
     android:orientation="vertical"
     android:background="#000000"
     android:fitsSystemWindows="true"
-    tools:context="io.github.stardomains3.oxproxion.SavedChatsFragment">
+    tools:context="io.github.stardomains3.omnichat.SavedChatsFragment">
 
     <com.google.android.material.appbar.MaterialToolbar
         android:id="@+id/toolbar"

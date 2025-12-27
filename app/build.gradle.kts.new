@@ -10,7 +10,7 @@ configurations.all {
     exclude(group = "org.jetbrains", module = "annotations-java5")
 }
 android {
-    namespace = "io.github.stardomains3.omnichat"
+    namespace = "io.github.stardomains3.oxproxion"
     compileSdk = 36
     configurations.all {
         resolutionStrategy.eachDependency {
@@ -20,8 +20,24 @@ android {
             }
         }
     }
+    productFlavors {
+        create("omnilore") {
+            dimension = "branding"
+            applicationIdSuffix = ".omnilore"
+            versionNameSuffix = "-omnilore"
+            
+            manifestPlaceholders["app_name"] = "OmniLore Oxproxion"
+            manifestPlaceholders["app_label"] = "OmniLore"
+        }
+        create("standard") {
+            dimension = "branding"
+            
+            manifestPlaceholders["app_name"] = "Oxproxion"
+            manifestPlaceholders["app_label"] = "Oxproxion"
+        }
+    }
     defaultConfig {
-        applicationId = "io.github.stardomains3.omnichat"
+        applicationId = "io.github.stardomains3.oxproxion"
         minSdk = 31
         targetSdk = 36
         versionCode = 134
@@ -32,9 +48,41 @@ android {
             useSupportLibrary = false
         }
     }
+    productFlavors {
+        create("omnilore") {
+            dimension = "branding"
+            applicationIdSuffix = ".omnilore"
+            versionNameSuffix = "-omnilore"
+            
+            manifestPlaceholders["app_name"] = "OmniLore Oxproxion"
+            manifestPlaceholders["app_label"] = "OmniLore"
+        }
+        create("standard") {
+            dimension = "branding"
+            
+            manifestPlaceholders["app_name"] = "Oxproxion"
+            manifestPlaceholders["app_label"] = "Oxproxion"
+        }
+    }
     dependenciesInfo {
         includeInApk = false
         includeInBundle = false
+    }
+    productFlavors {
+        create("omnilore") {
+            dimension = "branding"
+            applicationIdSuffix = ".omnilore"
+            versionNameSuffix = "-omnilore"
+            
+            manifestPlaceholders["app_name"] = "OmniLore Oxproxion"
+            manifestPlaceholders["app_label"] = "OmniLore"
+        }
+        create("standard") {
+            dimension = "branding"
+            
+            manifestPlaceholders["app_name"] = "Oxproxion"
+            manifestPlaceholders["app_label"] = "Oxproxion"
+        }
     }
     buildTypes {
         getByName("release") {
@@ -53,9 +101,41 @@ android {
             isDebuggable = true
         }
     }
+    productFlavors {
+        create("omnilore") {
+            dimension = "branding"
+            applicationIdSuffix = ".omnilore"
+            versionNameSuffix = "-omnilore"
+            
+            manifestPlaceholders["app_name"] = "OmniLore Oxproxion"
+            manifestPlaceholders["app_label"] = "OmniLore"
+        }
+        create("standard") {
+            dimension = "branding"
+            
+            manifestPlaceholders["app_name"] = "Oxproxion"
+            manifestPlaceholders["app_label"] = "Oxproxion"
+        }
+    }
     compileOptions {
         sourceCompatibility = JavaVersion.VERSION_17
         targetCompatibility = JavaVersion.VERSION_17
+    }
+    productFlavors {
+        create("omnilore") {
+            dimension = "branding"
+            applicationIdSuffix = ".omnilore"
+            versionNameSuffix = "-omnilore"
+            
+            manifestPlaceholders["app_name"] = "OmniLore Oxproxion"
+            manifestPlaceholders["app_label"] = "OmniLore"
+        }
+        create("standard") {
+            dimension = "branding"
+            
+            manifestPlaceholders["app_name"] = "Oxproxion"
+            manifestPlaceholders["app_label"] = "Oxproxion"
+        }
     }
     kotlin {
         compilerOptions {
@@ -68,8 +148,40 @@ android {
             }
         }
     }
+    productFlavors {
+        create("omnilore") {
+            dimension = "branding"
+            applicationIdSuffix = ".omnilore"
+            versionNameSuffix = "-omnilore"
+            
+            manifestPlaceholders["app_name"] = "OmniLore Oxproxion"
+            manifestPlaceholders["app_label"] = "OmniLore"
+        }
+        create("standard") {
+            dimension = "branding"
+            
+            manifestPlaceholders["app_name"] = "Oxproxion"
+            manifestPlaceholders["app_label"] = "Oxproxion"
+        }
+    }
     buildFeatures {
         viewBinding = true
+    }
+    productFlavors {
+        create("omnilore") {
+            dimension = "branding"
+            applicationIdSuffix = ".omnilore"
+            versionNameSuffix = "-omnilore"
+            
+            manifestPlaceholders["app_name"] = "OmniLore Oxproxion"
+            manifestPlaceholders["app_label"] = "OmniLore"
+        }
+        create("standard") {
+            dimension = "branding"
+            
+            manifestPlaceholders["app_name"] = "Oxproxion"
+            manifestPlaceholders["app_label"] = "Oxproxion"
+        }
     }
     packaging {
         resources {
@@ -79,6 +191,22 @@ android {
                 // Keep license files for attribution purposes
                 // Only exclude problematic duplicates if needed
             )
+        }
+    }
+    productFlavors {
+        create("omnilore") {
+            dimension = "branding"
+            applicationIdSuffix = ".omnilore"
+            versionNameSuffix = "-omnilore"
+            
+            manifestPlaceholders["app_name"] = "OmniLore Oxproxion"
+            manifestPlaceholders["app_label"] = "OmniLore"
+        }
+        create("standard") {
+            dimension = "branding"
+            
+            manifestPlaceholders["app_name"] = "Oxproxion"
+            manifestPlaceholders["app_label"] = "Oxproxion"
         }
     }
 

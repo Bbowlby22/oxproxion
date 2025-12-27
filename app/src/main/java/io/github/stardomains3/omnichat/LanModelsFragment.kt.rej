@@ -1,0 +1,11 @@
+--- app/src/main/java/io/github/stardomains3/oxproxion/LanModelsFragment.kt
++++ app/src/main/java/io/github/stardomains3/oxproxion/LanModelsFragment.kt
+@@ -106,6 +106,8 @@ class LanModelsFragment : Fragment() {
+                 Toast.makeText(context, "Model with this API Identifier already exists.", Toast.LENGTH_SHORT).show()
+             } else {
+                 viewModel.addCustomModel(model)
++                // CRITICAL FIX: Set as active model immediately after adding
++                viewModel.setModel(model.apiIdentifier)
+                 val provider = viewModel.getCurrentLanProvider()
+                 Toast.makeText(context, "LAN Model added: ${model.displayName}", Toast.LENGTH_SHORT).show()
+             }
