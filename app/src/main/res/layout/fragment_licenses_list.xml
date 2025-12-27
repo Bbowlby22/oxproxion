@@ -7,7 +7,7 @@
     android:orientation="vertical"
     android:background="#000000"
     android:fitsSystemWindows="true"
-    tools:context="io.github.stardomains3.oxproxion.LicenseListFragment">
+    tools:context="io.github.stardomains3.omnichat.LicenseListFragment">
 
     <com.google.android.material.appbar.MaterialToolbar
         android:id="@+id/toolbar"
