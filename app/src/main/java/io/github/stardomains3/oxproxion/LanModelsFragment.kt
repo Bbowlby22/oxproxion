@@ -105,8 +105,10 @@ class LanModelsFragment : Fragment() {
             Toast.makeText(context, "Model with this API Identifier already exists.", Toast.LENGTH_SHORT).show()
         } else {
             viewModel.addCustomModel(model)
+            // CRITICAL FIX: Set as active model immediately after adding
+            viewModel.setModel(model.apiIdentifier)
             val provider = viewModel.getCurrentLanProvider()
-            Toast.makeText(context, "LAN Model added: ${model.displayName}", Toast.LENGTH_SHORT).show()
+            Toast.makeText(context, "LAN Model added & selected: ${model.displayName}", Toast.LENGTH_SHORT).show()
         }
     }
 
