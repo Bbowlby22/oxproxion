@@ -35,7 +35,7 @@ class OmniLoreService(private val context: Context) {
     companion object {
         const val TAG = "OmniLoreService"
         // Default to localhost - can be configured via settings
-        const val DEFAULT_HOST = "http://127.0.0.1:8420"
+        const val DEFAULT_HOST = "http://10.0.0.181:8420"
         const val CHAT_ENDPOINT = "/chat"
         const val QUERY_ENDPOINT = "/query"
     }
@@ -167,11 +167,16 @@ class OmniLoreService(private val context: Context) {
     
     /**
      * Get the configured OmniLore host
-     * Can be extended to read from SharedPreferences
+     * Reads from SharedPreferences if available
      */
     private fun getConfiguredHost(): String {
-        // TODO: Make this configurable via app settings
-        return DEFAULT_HOST
+        return try {
+            val prefs = SharedPreferencesHelper(context)
+            prefs.getOmniLoreEndpoint()
+        } catch (e: Exception) {
+            Log.w(TAG, "Could not read OmniLore endpoint from prefs, using default: ${e.message}")
+            DEFAULT_HOST
+        }
     }
     
     fun cleanup() {

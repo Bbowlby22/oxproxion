@@ -292,6 +292,19 @@ class ChatViewModel(application: Application) : AndroidViewModel(application) {
         }*/
         migrateOpenRouterModels()
         allOpenRouterModels = sharedPreferencesHelper.getOpenRouterModels()
+        // Add OmniLore.AI as an available model
+        allOpenRouterModels = allOpenRouterModels + listOf(
+            LlmModel(
+                displayName = "OmniLore.AI",
+                apiIdentifier = "omnilore/smart-chat",
+                isVisionCapable = false,
+                isImageGenerationCapable = false,
+                isReasoningCapable = false,
+                created = System.currentTimeMillis(),
+                isFree = true,
+                isLANModel = false
+            )
+        )
         _activeChatModel.value = sharedPreferencesHelper.getPreferenceModelnew()
         _isStreamingEnabled.value = sharedPreferencesHelper.getStreamingPreference()
         _isReasoningEnabled.value = sharedPreferencesHelper.getReasoningPreference()
@@ -566,6 +579,41 @@ class ChatViewModel(application: Application) : AndroidViewModel(application) {
         lanFetchJob?.cancel()
     }
 
+    private fun handleOmniLoreChat(userContent: JsonElement, systemMessage: String?) {
+        viewModelScope.launch {
+            _isAwaitingResponse.value = true
+            val prefs = SharedPreferencesHelper(getApplication())
+            val omniloreService = OmniLoreService(getApplication())
+            
+            try {
+                val messages = mutableListOf<Map<String, String>>()
+                systemMessage?.let {
+                    messages.add(mapOf("role" to "system", "content" to it))
+                }
+                messages.add(mapOf("role" to "user", "content" to userContent.toString().trim('"')))
+                
+                val response = omniloreService.chat(messages, model = "gpt-4o-mini")
+                
+                _chatMessages.value = (_chatMessages.value ?: emptyList()).plus(
+                    FlexibleMessage(
+                        role = "assistant",
+                        content = JsonPrimitive(response)
+                    )
+                )
+            } catch (e: Exception) {
+                _chatMessages.value = (_chatMessages.value ?: emptyList()).plus(
+                    FlexibleMessage(
+                        role = "assistant",
+                        content = JsonPrimitive("Error contacting OmniLore: ${e.message}")
+                    )
+                )
+            } finally {
+                _isAwaitingResponse.value = false
+                omniloreService.cleanup()
+            }
+        }
+    }
+
     fun sendUserMessage(
         userContent: JsonElement,
         systemMessage: String? = null
@@ -576,6 +624,10 @@ class ChatViewModel(application: Application) : AndroidViewModel(application) {
             pendingUserImageUri = null
         }
         activeChatUrl = "https://openrouter.ai/api/v1/chat/completions"
+        if (activeModelIsOmniLore()) {
+            handleOmniLoreChat(userContent, systemMessage)
+            return
+        }
         activeChatApiKey = sharedPreferencesHelper.getApiKeyFromPrefs("openrouter_api_key")
 
         if (activeModelIsLan())
@@ -1718,6 +1770,8 @@ class ChatViewModel(application: Application) : AndroidViewModel(application) {
         val builtIns = getBuiltInModels()
         return customModels.find { it.apiIdentifier == id } ?: builtIns.find { it.apiIdentifier == id } }
     fun activeModelIsLan(): Boolean = getActiveLlmModel()?.isLANModel == true
+    
+    fun activeModelIsOmniLore(): Boolean = _activeChatModel.value?.startsWith("omnilore") == true
 
     // 3. Add this suspend aggregator (calls your existing fetch* funcs; assumes they are suspend)
     private suspend fun fetchLanModels(provider: String): List<LlmModel> = withContext(Dispatchers.IO) {

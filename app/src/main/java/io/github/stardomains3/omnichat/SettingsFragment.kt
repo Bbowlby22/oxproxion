@@ -104,6 +104,10 @@ class SettingsFragment : Fragment(R.layout.fragment_settings) {
         lanButton.setOnClickListener {
             SaveLANDialogFragment().show(childFragmentManager, SaveLANDialogFragment.TAG)
         }
+        val omniloreButton = view.findViewById<com.google.android.material.button.MaterialButton>(R.id.omniloreButton)
+        omniloreButton.setOnClickListener {
+            OmniLoreConfigDialog().show(childFragmentManager, OmniLoreConfigDialog.TAG)
+        }
         biometricsSwitch.setOnCheckedChangeListener { _, isChecked ->
             if (isChecked) {
                 val bm = BiometricManager.from(requireContext())
