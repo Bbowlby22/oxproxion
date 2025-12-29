@@ -141,13 +141,13 @@ class HelpFragment : Fragment(R.layout.fragment_help) {
 
 
         val markdownContent = """
-            # oxproxion Help Guide
+            # OmniChat for OmniLore.AI
             
              **App Version: $versionName**
 
-            Welcome! This guide will help you understand how to use the **oxproxion** app.
+            Welcome! This guide will help you understand how to use **OmniChat** with OmniLore.AI.
 
-            **oxproxion** is an open-source Android app for chatting with OpenRouter LLMs, supporting both text and image inputs for compatible models. It now also allows chat with Ollama, LM Studio, llama.cpp and MLX LM models served on your LAN.
+            **OmniChat** is an open-source Android app for chatting with OpenRouter LLMs, supporting both text and image inputs for compatible models. It also supports Ollama, LM Studio, llama.cpp, MLX LM models served on your LAN, and OmniLore.AI instances.
 
             ---
 

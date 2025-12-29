@@ -221,6 +221,22 @@
                 app:strokeWidth="1dp"
                 app:backgroundTint="#1C1C1E" />
             <com.google.android.material.button.MaterialButton
+                android:id="@+id/omniloreButton"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="16dp"
+                android:text="OmniLore.AI Settings"
+                app:icon="@drawable/ic_lan"
+                app:iconSize="28dp"
+                app:iconTint="#667eea"
+                app:iconTintMode="src_in"
+                app:iconGravity="start"
+                app:iconPadding="12dp"
+                android:textColor="#F8F8F8"
+                app:strokeColor="#667eea"
+                app:strokeWidth="1dp"
+                app:backgroundTint="#1C1C1E" />
+            <com.google.android.material.button.MaterialButton
                 android:id="@+id/promptsButton"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"

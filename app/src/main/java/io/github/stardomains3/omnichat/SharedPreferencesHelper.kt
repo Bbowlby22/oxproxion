@@ -608,5 +608,16 @@ class SharedPreferencesHelper(context: Context) {
         return mainPrefs.getBoolean(KEY_CLEAR_CHAT_DEFAULT2, false)  // Default to unchecked (false)
     }
 
+    fun getOmniLoreEndpoint(): String {
+        return mainPrefs.getString("omnilore_endpoint", "http://10.0.0.181:8420") ?: "http://10.0.0.181:8420"
+    }
+
+    fun setOmniLoreEndpoint(endpoint: String?) {
+        mainPrefs.edit {
+            if (endpoint.isNullOrBlank()) remove("omnilore_endpoint")
+            else putString("omnilore_endpoint", endpoint)
+        }
+    }
+
 }
 
